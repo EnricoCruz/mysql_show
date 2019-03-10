@@ -13,13 +13,12 @@ if  __name__ == "__main__" :
     ##SQL = 'SELECT * from actor'
     tick = time()
     cursor.execute(SQL)
+    query = cursor.fetchall()
 
-    for x in cursor.fetchall():
+    for x in query:
         print('====================')
         for y in x:
             if type(y) == bytearray:
-                #print(str(y.decode() ) )
-                #print(y)
                 string = ""
                 for b in y:
                     string += str(b)
@@ -36,7 +35,8 @@ if  __name__ == "__main__" :
         print('fetched total of ' + str(cursor.rowcount) + " rows in " + str(execution_time) + ' seconds.')
         print('Would you like to export the result as a file?')
         order = input('Type Yes/No: ')
-        tasksManager.handleTask(cursor, order)
+        ##order = 'yes'
+        tasksManager.handleTask(query, order)
 
 else:
     print('invalid access of file.')
